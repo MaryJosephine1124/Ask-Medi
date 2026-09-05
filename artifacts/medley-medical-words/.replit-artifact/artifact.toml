@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Medley Medical Words"
+description = "A friendly daily medical vocabulary study companion for aspiring doctors, with a word of the day, easy explanations, clinical usage, mnemonics, and a searchable medical dictionary."
+version = "1.0.0"
+id = "artifacts/medley-medical-words"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18402
+
+[services.development]
+run = "pnpm --filter @workspace/medley-medical-words run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/medley-medical-words", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/medley-medical-words/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18402"
+BASE_PATH = "/"
