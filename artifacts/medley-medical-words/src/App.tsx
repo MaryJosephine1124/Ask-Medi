@@ -30,6 +30,8 @@ const queryClient = new QueryClient();
 
 type WordEntry = MedicalDictionaryEntry;
 const WORDS = dictionaryProvider.entries;
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const AVAILABLE_LETTERS = new Set(WORDS.map((word) => word.term.charAt(0).toUpperCase()));
 
 function getLocalDateKey(date = new Date()) {
   const year = date.getFullYear();
@@ -91,7 +93,10 @@ function Header({ currentPath }: { currentPath: string }) {
       <div className="header-inner">
         <Link href="/" className="brand-link" data-testid="link-brand-home">
           <span className="brand-mark"><MedicalMark size={20} /></span>
-          <span className="brand-name">medley<em>.</em></span>
+          <span className="brand-copy">
+            <span className="brand-name">MediMind<em>.</em></span>
+            <span className="brand-tagline">Find the words behind the work.</span>
+          </span>
         </Link>
         <nav className="header-nav" aria-label="Main navigation">
           <Link href="/" className={`nav-link ${currentPath === '/' ? 'nav-link-active' : ''}`} data-testid="link-daily-word">
@@ -207,6 +212,7 @@ function Home() {
           <div className="stagger-1">
             <div className="eyebrow"><span className="eyebrow-line" /> Daily word · {formatDailyDate(dateKey)}</div>
             <h1 className="hero-title">Make medicine<br />feel <span className="accent-word">knowable.</span></h1>
+            <p className="hero-slogan">Find the words behind the work.</p>
             <p className="hero-copy">A small, steady vocabulary ritual for the people learning how to care for others. One useful word, with the context to make it stick.</p>
           </div>
           <ProgressCard studied={studied} />
@@ -215,7 +221,7 @@ function Home() {
         <section>
           <div className="section-heading stagger-4">
             <div>
-              <div className="eyebrow"><span className="eyebrow-line" /> How to use Medley</div>
+            <div className="eyebrow"><span className="eyebrow-line" /> How to use MediMind</div>
               <h2 className="section-title">Tiny lessons. Real language.</h2>
             </div>
             <span className="section-note">Keep it close, come back often.</span>
@@ -235,12 +241,23 @@ function Home() {
 function Dictionary() {
   const [query, setQuery] = useState('');
   const [selectedTerm, setSelectedTerm] = useState(WORDS[0].term);
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
   const [saved, setSaved] = useState<string[]>(() => {
     try { return JSON.parse(localStorage.getItem('medley-saved') ?? '[]') as string[]; } catch { return []; }
   });
   const normalizedQuery = query.trim().toLowerCase();
-  const results = useMemo(() => dictionaryProvider.search(normalizedQuery), [normalizedQuery]);
+  const searchedResults = useMemo(() => dictionaryProvider.search(normalizedQuery), [normalizedQuery]);
+  const results = useMemo(
+    () => selectedLetter ? searchedResults.filter((word) => word.term.charAt(0).toUpperCase() === selectedLetter) : searchedResults,
+    [searchedResults, selectedLetter],
+  );
+  const suggestions = normalizedQuery ? searchedResults.slice(0, 6) : [];
   const selected = results.find((word) => word.term === selectedTerm) ?? results[0];
+  const selectSuggestion = (term: string) => {
+    setSelectedTerm(term);
+    setQuery(term);
+    setSelectedLetter(null);
+  };
   const toggleSave = () => {
     if (!selected) return;
     const next = saved.includes(selected.term) ? saved.filter((term) => term !== selected.term) : [...saved, selected.term];
@@ -256,18 +273,48 @@ function Dictionary() {
           <p className="dictionary-copy stagger-3">A growing shelf of precise medical language, translated into something you can carry into your next lecture, lab, or patient conversation.</p>
           <div className="search-wrap stagger-4">
             <Search className="search-icon" size={18} />
-            <input value={query} onChange={(event) => { setQuery(event.target.value); }} className="search-input" type="search" placeholder="Search a term, concept, or plain-English idea" aria-label="Search medical dictionary" data-testid="input-dictionary-search" />
+            <input value={query} onChange={(event) => { setQuery(event.target.value); setSelectedLetter(null); }} className="search-input" type="search" placeholder="Search a term, concept, or plain-English idea" aria-label="Search medical dictionary" data-testid="input-dictionary-search" />
             {query && <button className="search-clear" onClick={() => setQuery('')} aria-label="Clear search" data-testid="button-clear-search"><X size={16} /></button>}
+            {suggestions.length > 0 && (
+              <div className="search-suggestions" role="listbox" aria-label="Search suggestions">
+                {suggestions.map((word) => (
+                  <button key={word.term} className="suggestion-button" onMouseDown={(event) => event.preventDefault()} onClick={() => selectSuggestion(word.term)} role="option">
+                    <span className="suggestion-term">{word.term}</span>
+                    <span className="suggestion-category">{word.category}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className="alphabet-nav" aria-label="Browse dictionary alphabetically">
+            <button className={`alphabet-button alphabet-all ${selectedLetter === null ? 'active' : ''}`} onClick={() => { setSelectedLetter(null); setQuery(''); }} aria-label="Show all dictionary terms">All</button>
+            {ALPHABET.map((letter) => (
+              <button
+                key={letter}
+                className={`alphabet-button ${selectedLetter === letter ? 'active' : ''} ${!AVAILABLE_LETTERS.has(letter) ? 'unavailable' : ''}`}
+                onClick={() => { setSelectedLetter((current) => current === letter ? null : letter); setQuery(''); }}
+                disabled={!AVAILABLE_LETTERS.has(letter)}
+                aria-label={`Browse terms starting with ${letter}`}
+                aria-pressed={selectedLetter === letter}
+              >
+                {letter}
+              </button>
+            ))}
           </div>
         </section>
         <section className="dictionary-layout">
           <aside className="results-panel stagger-2">
-            <div className="results-top"><span>{normalizedQuery ? 'MATCHES' : 'ALL WORDS'}</span><span>{results.length.toString().padStart(2, '0')}</span></div>
-            {results.length > 0 ? results.map((word) => (
-              <button key={word.term} className={`result-button ${selected?.term === word.term ? 'selected' : ''}`} onClick={() => setSelectedTerm(word.term)} data-testid={`button-select-${word.term}`}>
-                <span><span className="result-term">{word.term}</span><br /><span className="result-kind">{word.category}</span></span>
-                {selected?.term === word.term && <ArrowRight size={15} />}
-              </button>
+            <div className="results-top"><span>{normalizedQuery ? 'MATCHES' : selectedLetter ? `${selectedLetter} TERMS` : 'ALL WORDS'}</span><span>{results.length.toString().padStart(2, '0')}</span></div>
+            {results.length > 0 ? results.map((word, index) => (
+              <div className="result-group" key={word.term}>
+                {(index === 0 || word.term.charAt(0).toUpperCase() !== results[index - 1].term.charAt(0).toUpperCase()) && (
+                  <div className="letter-heading">{word.term.charAt(0).toUpperCase()}</div>
+                )}
+                <button className={`result-button ${selected?.term === word.term ? 'selected' : ''}`} onClick={() => setSelectedTerm(word.term)} data-testid={`button-select-${word.term}`}>
+                  <span><span className="result-term">{word.term}</span><br /><span className="result-kind">{word.category}</span></span>
+                  {selected?.term === word.term && <ArrowRight size={15} />}
+                </button>
+              </div>
             )) : (
               <div className="empty-state" data-testid="status-no-results">
                 <CircleHelp size={21} />
@@ -293,7 +340,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <span className="footer-brand">medley.</span>
+        <span className="footer-brand">MediMind<em>.</em></span>
         <span>Built for curious future doctors · educational reference, not medical advice</span>
       </div>
     </footer>

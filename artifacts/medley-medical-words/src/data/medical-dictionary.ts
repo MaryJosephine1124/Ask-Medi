@@ -1,4 +1,5 @@
 import { ANATOMY_TERMS } from '@/data/anatomy-terms';
+import { EXPANDED_MEDICAL_TERMS } from '@/data/expanded-terms';
 
 export type MedicalDictionaryEntry = {
   term: string;
@@ -10,6 +11,7 @@ export type MedicalDictionaryEntry = {
   clinical: string;
   mnemonic: string;
   related: string[];
+  aliases?: string[];
 };
 
 export interface MedicalDictionaryProvider {
@@ -1027,23 +1029,32 @@ const LOCAL_MEDICAL_TERMS: MedicalDictionaryEntry[] = [
     related: ['prognosis', 'adverse effect'],
   },
   ...ANATOMY_TERMS,
+  ...EXPANDED_MEDICAL_TERMS,
 ];
 
 const normalize = (value: string) => value.trim().toLowerCase();
+const UNIQUE_MEDICAL_TERMS = Array.from(
+  new Map(LOCAL_MEDICAL_TERMS.map((entry) => [normalize(entry.term), entry])).values(),
+);
+const SORTED_MEDICAL_TERMS = UNIQUE_MEDICAL_TERMS.sort((a, b) => a.term.localeCompare(b.term));
 
 export const localMedicalDictionary: MedicalDictionaryProvider = {
-  entries: LOCAL_MEDICAL_TERMS,
+  entries: SORTED_MEDICAL_TERMS,
   search(query) {
     const normalizedQuery = normalize(query);
-    if (!normalizedQuery) return LOCAL_MEDICAL_TERMS;
-    return LOCAL_MEDICAL_TERMS.filter((entry) =>
-      `${entry.term} ${entry.category} ${entry.level} ${entry.plain} ${entry.proper}`
+    if (!normalizedQuery) return SORTED_MEDICAL_TERMS;
+    return SORTED_MEDICAL_TERMS.filter((entry) =>
+      `${entry.term} ${entry.aliases?.join(' ') ?? ''} ${entry.related.join(' ')} ${entry.category} ${entry.level} ${entry.plain} ${entry.proper} ${entry.clinical} ${entry.mnemonic}`
         .toLowerCase()
         .includes(normalizedQuery),
     );
   },
   getByTerm(term) {
-    return LOCAL_MEDICAL_TERMS.find((entry) => normalize(entry.term) === normalize(term));
+    const normalizedTerm = normalize(term);
+    return SORTED_MEDICAL_TERMS.find((entry) =>
+      normalize(entry.term) === normalizedTerm
+      || entry.aliases?.some((alias) => normalize(alias) === normalizedTerm),
+    );
   },
 };
 

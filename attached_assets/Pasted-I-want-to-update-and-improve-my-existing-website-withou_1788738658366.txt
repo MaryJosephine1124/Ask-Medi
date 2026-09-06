@@ -1,0 +1,250 @@
+I want to update and improve my existing website without removing or breaking any of its current functionality or design.
+
+IMPORTANT: Keep the overall website structure, aesthetic, layout, features, and functionality that already exist. This is an improvement/update, not a complete redesign.
+
+BRANDING UPDATE:
+Change the name of the website everywhere from its current name to:
+
+MEDIMIND
+
+The official slogan/tagline should be:
+
+"Find the words behind the work."
+
+Use this branding consistently throughout BOTH major parts of the website:
+1. The Word of the Day section
+2. The Medical Dictionary section
+
+The logo/header/navbar should clearly say:
+
+MediMind
+Find the words behind the work.
+
+Make the branding look polished, professional, memorable, and cohesive. Do not make it look childish, overly corporate, or generic.
+
+MEDICAL DICTIONARY EXPANSION:
+
+Significantly expand the existing medical term database. Add as many accurate, useful, and interesting medical terms as reasonably possible.
+
+The dictionary should include terms from many areas of medicine, including but not limited to:
+
+- Anatomy
+- General medical terminology
+- Symptoms and clinical signs
+- Cardiovascular medicine
+- Neurology
+- Respiratory medicine
+- Gastroenterology
+- Musculoskeletal medicine
+- Orthopedics
+- Dermatology
+- Hematology
+- Immunology
+- Endocrinology
+- Nephrology
+- Urology
+- Infectious disease
+- Oncology
+- Pathology
+- Pharmacology
+- Medical procedures
+- Diagnostic tests
+- Surgical terminology
+- Emergency medicine
+- Medical abbreviations
+- Common medical conditions
+- Interesting and unusual medical terminology
+
+Add a large and diverse collection of terms rather than only adding extremely basic anatomy words.
+
+Some examples of additional types of words that should be included are:
+
+crepitus
+paresthesia
+auscultation
+petechiae
+ecchymosis
+tachypnea
+bradypnea
+hemoptysis
+hematemesis
+melena
+dysphonia
+anosmia
+nystagmus
+anisocoria
+diplopia
+mydriasis
+miosis
+sialorrhea
+dysarthria
+dysmetria
+ataxia
+bradykinesia
+dyskinesia
+fasciculation
+myoclonus
+clonus
+allodynia
+orthopnea
+paroxysmal
+prodrome
+idiopathic
+iatrogenic
+pathognomonic
+comorbidity
+contraindication
+differential diagnosis
+exacerbation
+remission
+prophylaxis
+
+Do not limit the database to these examples. Expand it substantially with terms across all categories.
+
+ACCURACY:
+Do not invent fake medical terms or inaccurate definitions. Medical information should be accurate. If a term cannot be confidently defined, do not fabricate information.
+
+Each medical term should have the same useful format already established by the website, including wherever possible:
+
+- Medical term
+- Pronunciation
+- Professional medical definition
+- "In Simple Words" explanation that makes the term easy for beginners to understand
+- When doctors or healthcare professionals use the term
+- A mnemonic or memory trick when appropriate
+- Related terms when available
+
+ALPHABETICAL ORGANIZATION:
+
+Organize the ENTIRE Medical Dictionary alphabetically from A to Z.
+
+Add a clear alphabetical navigation system at the top of the dictionary such as:
+
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+
+Users should be able to click a letter and immediately browse terms beginning with that letter.
+
+Within each letter, terms must be displayed in proper alphabetical order.
+
+For example:
+
+A
+Abdomen
+Abdominal cavity
+Abduction
+Abscess
+Acetylcholine
+Acidosis
+Acute kidney injury
+Adduction
+Adipose tissue
+Adrenal gland
+Aneurysm
+Anemia
+Angina
+Angiography
+Angioplasty
+Anisocoria
+Anorexia
+Anterior
+Antibody
+Antigen
+Aorta
+Apnea
+Appendicitis
+Appendix
+Arrhythmia
+Artery
+Arthralgia
+Arthritis
+Ascites
+Asthma
+Atelectasis
+Ataxia
+Atrium
+Auscultation
+Autoimmune disease
+Axon
+
+The exact order should always follow proper alphabetical sorting.
+
+SEARCH FUNCTIONALITY:
+
+Keep and improve the dictionary search function.
+
+As a user types into the search bar:
+- Show relevant matching terms
+- Provide autocomplete suggestions
+- Allow searching by partial words
+- Make results easy to select
+- Do not require exact capitalization
+- Make searching fast and intuitive
+
+For example, typing "tach" should help users find:
+- Tachycardia
+- Tachypnea
+- Tachyarrhythmia
+
+Typing "heart attack" should ideally help users find Myocardial Infarction if synonyms or related search terms are supported.
+
+WORD OF THE DAY:
+
+Keep the existing Word of the Day functionality.
+
+Make sure the featured word:
+- Is different each calendar day
+- Does NOT randomly change when the page refreshes
+- Is based consistently on the current date
+- Changes automatically at the start of a new day
+- Uses terms from the expanded medical term database
+- Does not repeat excessively
+
+The Word of the Day section should also use the MediMind branding and slogan.
+
+ARCHITECTURE:
+
+Organize the medical term data cleanly so the dictionary can easily be expanded in the future.
+
+Do not hardcode random terms throughout multiple components.
+
+Create a clean central data structure/database for terms so that:
+- New terms can easily be added
+- Terms can be alphabetically sorted automatically
+- Search works across all terms
+- Word of the Day can pull from the same database
+- Each term can contain structured information such as pronunciation, definition, simple explanation, clinical use, mnemonic, category, and related terms
+
+DESIGN CONSISTENCY:
+
+Make sure BOTH the Word of the Day section and Medical Dictionary feel like parts of the same MediMind product.
+
+The Medical Dictionary should not feel like a separate website.
+
+Use consistent:
+- Typography
+- Colors
+- Cards
+- Buttons
+- Navigation
+- Icons
+- Spacing
+- Branding
+
+The overall aesthetic should remain cute and visually appealing while still feeling professional enough for aspiring doctors, medical students, healthcare workers, and curious learners.
+
+FINAL CHECK:
+
+Before finishing, verify that:
+- The website name is MediMind everywhere
+- The slogan "Find the words behind the work." is used consistently
+- Both major sections reflect the new branding
+- The medical dictionary contains significantly more terms
+- Terms are organized alphabetically
+- Alphabet navigation works
+- Search works correctly
+- Word of the Day still works
+- The Word of the Day does not randomly change on refresh
+- Existing features are not accidentally removed
+- The website remains responsive and visually polished
+
+Do not replace the existing website with a generic template. Improve the current MediMind website while preserving what makes the current design unique.
