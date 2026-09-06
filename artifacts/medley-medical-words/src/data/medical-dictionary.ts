@@ -1,3 +1,5 @@
+import { ANATOMY_TERMS } from '@/data/anatomy-terms';
+
 export type MedicalDictionaryEntry = {
   term: string;
   pronunciation: string;
@@ -1024,6 +1026,7 @@ const LOCAL_MEDICAL_TERMS: MedicalDictionaryEntry[] = [
     mnemonic: 'Palliative care adds comfort and support alongside medical treatment.',
     related: ['prognosis', 'adverse effect'],
   },
+  ...ANATOMY_TERMS,
 ];
 
 const normalize = (value: string) => value.trim().toLowerCase();

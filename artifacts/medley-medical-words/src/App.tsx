@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
@@ -30,6 +30,51 @@ const queryClient = new QueryClient();
 
 type WordEntry = MedicalDictionaryEntry;
 const WORDS = dictionaryProvider.entries;
+
+function getLocalDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function getDailyWord(dateKey: string) {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  const dayNumber = Math.floor(Date.UTC(year, month - 1, day) / 86_400_000);
+  return WORDS[((dayNumber % WORDS.length) + WORDS.length) % WORDS.length];
+}
+
+function formatDailyDate(dateKey: string) {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  return new Intl.DateTimeFormat(undefined, { month: 'long', day: 'numeric' }).format(new Date(year, month - 1, day));
+}
+
+function useLocalDateKey() {
+  const [dateKey, setDateKey] = useState(() => getLocalDateKey());
+
+  useEffect(() => {
+    const refreshDate = () => {
+      const nextDateKey = getLocalDateKey();
+      setDateKey((currentDateKey) => currentDateKey === nextDateKey ? currentDateKey : nextDateKey);
+    };
+
+    const now = new Date();
+    const nextMidnight = new Date(now);
+    nextMidnight.setHours(24, 0, 0, 0);
+    const midnightTimer = window.setTimeout(refreshDate, nextMidnight.getTime() - now.getTime() + 50);
+    const visibilityHandler = () => {
+      if (document.visibilityState === 'visible') refreshDate();
+    };
+
+    document.addEventListener('visibilitychange', visibilityHandler);
+    return () => {
+      window.clearTimeout(midnightTimer);
+      document.removeEventListener('visibilitychange', visibilityHandler);
+    };
+  }, [dateKey]);
+
+  return dateKey;
+}
 
 function MedicalMark({ size = 21 }: { size?: number }) {
   return (
@@ -140,11 +185,12 @@ function WordDetail({
 }
 
 function Home() {
+  const dateKey = useLocalDateKey();
   const [saved, setSaved] = useState<string[]>(() => {
     try { return JSON.parse(localStorage.getItem('medley-saved') ?? '[]') as string[]; } catch { return []; }
   });
-  const [studied, setStudied] = useState(() => localStorage.getItem('medley-studied') === new Date().toISOString().slice(0, 10));
-  const word = WORDS[0];
+  const [studied, setStudied] = useState(() => localStorage.getItem('medley-studied') === getLocalDateKey());
+  const word = getDailyWord(dateKey);
   const toggleSave = () => {
     const next = saved.includes(word.term) ? saved.filter((term) => term !== word.term) : [...saved, word.term];
     setSaved(next);
@@ -152,14 +198,14 @@ function Home() {
   };
   const markStudied = () => {
     setStudied(true);
-    localStorage.setItem('medley-studied', new Date().toISOString().slice(0, 10));
+    localStorage.setItem('medley-studied', dateKey);
   };
   return (
     <div className="page-enter">
       <main className="page-wrap">
         <section className="hero-grid">
           <div className="stagger-1">
-            <div className="eyebrow"><span className="eyebrow-line" /> Daily word · Tuesday, 14 May</div>
+            <div className="eyebrow"><span className="eyebrow-line" /> Daily word · {formatDailyDate(dateKey)}</div>
             <h1 className="hero-title">Make medicine<br />feel <span className="accent-word">knowable.</span></h1>
             <p className="hero-copy">A small, steady vocabulary ritual for the people learning how to care for others. One useful word, with the context to make it stick.</p>
           </div>
