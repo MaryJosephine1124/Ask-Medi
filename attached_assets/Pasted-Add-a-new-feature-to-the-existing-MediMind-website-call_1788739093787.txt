@@ -1,0 +1,351 @@
+Add a new feature to the existing MediMind website called "Ask Medi."
+
+IMPORTANT: Do not redesign, remove, or break any existing parts of the website. Preserve the current MediMind branding, layout, Medical Dictionary, Word of the Day, search functionality, alphabetical organization, and existing design. This is an additional feature that should feel naturally integrated into the existing website.
+
+FEATURE NAME:
+Ask Medi
+
+TAGLINE:
+Your personal medical learning assistant.
+
+PURPOSE:
+Ask Medi is an AI-powered educational assistant designed to help users understand and learn medical terminology. It should feel friendly, intelligent, encouraging, and approachable, like a very knowledgeable study buddy for aspiring doctors and curious learners.
+
+Ask Medi should NOT pretend to be a real doctor and should NOT provide personalized diagnoses or treatment instructions. It is an educational tool focused primarily on understanding medical terminology and concepts.
+
+DESIGN:
+
+Create a beautiful and intuitive Ask Medi interface that matches the existing MediMind website perfectly.
+
+Use the same:
+- Colors
+- Typography
+- Border radius
+- Card styles
+- Buttons
+- Navigation style
+- Overall cute but professional aesthetic
+
+The feature should feel like part of MediMind, not like a separate chatbot pasted onto the website.
+
+Add Ask Medi to the main navigation.
+
+Possible navigation structure:
+
+MediMind logo | Word of the Day | Dictionary | Ask Medi | Favorites
+
+Create a dedicated Ask Medi page.
+
+PAGE HEADER:
+
+🧠 Ask Medi
+
+Your personal medical learning assistant.
+
+Underneath, include a friendly introduction such as:
+
+"Hi! I'm Medi, your study buddy for learning the language of medicine. Ask me about medical terms, confusing concepts, mnemonics, and more."
+
+Include a clear disclaimer in a subtle but visible location:
+
+"Ask Medi is an educational tool and does not provide medical diagnoses or personal medical advice."
+
+CHAT INTERFACE:
+
+Create a polished chat interface.
+
+Include:
+- Conversation area
+- User messages
+- Medi responses
+- Text input
+- Send button
+- Clear conversation button
+- Loading/typing state while Medi is responding
+
+Make Medi's messages visually distinct from user messages.
+
+Do not make the interface overly corporate or boring. It should feel modern, friendly, intelligent, and slightly playful while remaining professional.
+
+WELCOME SCREEN:
+
+Before a user starts chatting, show suggested questions as clickable cards or buttons.
+
+Examples:
+
+"Explain a medical term simply"
+
+"What's the difference between an artery and a vein?"
+
+"Give me a mnemonic for tachycardia"
+
+"Quiz me on medical terminology"
+
+"Explain this like I'm 12"
+
+"Break down the Greek and Latin roots of a word"
+
+"Compare two medical terms"
+
+"What does this abbreviation mean?"
+
+When a user clicks one of these, automatically place an appropriate example question into the chat or begin the interaction.
+
+CORE CAPABILITIES:
+
+Ask Medi should be especially helpful with:
+
+1. SIMPLE EXPLANATIONS
+
+Users can ask:
+
+"What is paresthesia?"
+
+Medi should explain the term clearly in beginner-friendly language.
+
+Include the ability to explain concepts at different levels:
+
+- Explain simply
+- Explain like I'm 12
+- Explain for a future medical student
+- Give me the technical explanation
+
+2. MEDICAL TERM COMPARISONS
+
+Users should be able to ask:
+
+"What's the difference between tachycardia and tachypnea?"
+
+"Artery vs vein"
+
+"Hypertension vs hypotension"
+
+Medi should clearly compare terms.
+
+When appropriate, use organized formatting such as simple comparison cards or tables.
+
+3. MNEMONICS
+
+Users can ask Medi to create memory tricks for difficult terms.
+
+Example:
+
+"Help me remember the difference between afferent and efferent."
+
+Medi should create memorable, understandable mnemonics.
+
+Make the mnemonics educational and genuinely useful rather than random nonsense.
+
+4. QUIZ MODE
+
+Users can ask:
+
+"Quiz me on anatomy."
+
+"Test me on cardiovascular terms."
+
+"Give me a difficult medical vocabulary quiz."
+
+Ask Medi should be able to create interactive questions one at a time.
+
+After the user answers:
+- Tell them whether they were correct
+- Explain the answer
+- Continue to another question if requested
+
+Do not reveal the answer before giving the user a chance to respond.
+
+5. WORD BREAKDOWN
+
+Users can ask about the roots of medical terminology.
+
+Example:
+
+"Break down the word tachycardia."
+
+Medi should explain components when appropriate:
+
+tachy = fast
+card = heart
+ia = condition
+
+Then explain how the pieces combine.
+
+6. CLINICAL CONTEXT
+
+Users can ask:
+
+"When would a doctor use the word cyanosis?"
+
+Medi should explain the general clinical context educationally without diagnosing the user.
+
+7. RELATED WORDS
+
+When discussing a term, Medi should suggest related vocabulary.
+
+Example:
+
+If discussing tachycardia, suggest:
+
+- Bradycardia
+- Arrhythmia
+- Tachypnea
+- Palpitations
+
+Allow users to click related terms and explore them in the MediMind dictionary when possible.
+
+8. DICTIONARY INTEGRATION
+
+Ask Medi should be integrated with the existing MediMind Medical Dictionary.
+
+When a user asks about a term that exists in the dictionary:
+- Use the site's existing structured information when possible
+- Provide a link or button to "View full term in dictionary"
+- Suggest related MediMind terms
+
+The AI assistant and dictionary should feel connected rather than separate features.
+
+SAFETY AND ACCURACY:
+
+Ask Medi is an educational medical learning tool.
+
+It should not:
+- Diagnose users
+- Tell users what condition they have
+- Provide personalized treatment plans
+- Replace emergency services or professional medical care
+- Pretend to be a licensed healthcare professional
+
+If users ask personal medical questions, Ask Medi should gently explain that it can provide general educational information but cannot diagnose them.
+
+However, do not make the assistant overly repetitive or constantly display warnings during normal educational conversations.
+
+For ordinary questions about medical terminology, anatomy, physiology, and educational concepts, answer normally and helpfully.
+
+PERSONALITY:
+
+Medi should have a recognizable personality.
+
+Medi should be:
+
+- Friendly
+- Curious
+- Intelligent
+- Encouraging
+- Occasionally lightly funny
+- Never condescending
+- Excited about medicine and learning
+- Able to make complicated terminology feel less intimidating
+
+The tone should fit the MediMind brand.
+
+Example personality:
+
+"Great question! This one sounds intimidating, but the word is actually easier once you break it apart."
+
+or:
+
+"Medical terminology loves making simple things sound dramatically complicated. Let's decode it."
+
+Do not overuse emojis. Use them subtly.
+
+VISUAL IDENTITY:
+
+Give Ask Medi a subtle recognizable visual identity.
+
+Potentially create a small abstract brain/medical-inspired icon or mascot representation associated with Medi.
+
+Do not make it childish or cartoonish.
+
+It should fit naturally with the existing MediMind branding.
+
+CONVERSATION MEMORY:
+
+Within a single conversation, Ask Medi should remember context.
+
+For example:
+
+User: "Explain tachycardia."
+
+Medi explains.
+
+User: "How is it different from the slow version?"
+
+Medi should understand that the user is referring to bradycardia.
+
+CONVERSATION HISTORY:
+
+If feasible without requiring accounts, preserve the user's current conversation during their browsing session.
+
+Do not require users to create an account just to ask basic questions.
+
+QUICK ACTIONS:
+
+Below or beside relevant answers, include contextual quick action buttons such as:
+
+Explain simpler
+Give me a mnemonic
+Quiz me
+Compare terms
+Show related words
+Break down the word
+
+These buttons should help users continue learning without needing to think of another question.
+
+MOBILE DESIGN:
+
+Make Ask Medi fully responsive and easy to use on phones, tablets, and desktop.
+
+The chat input should remain easily accessible.
+
+Do not allow the interface to become cluttered on smaller screens.
+
+LOADING EXPERIENCE:
+
+When Medi is generating a response, show an elegant loading indicator.
+
+Instead of generic "Loading...", use something on-brand such as:
+
+"Medi is thinking..."
+
+"Decoding medical terminology..."
+
+"Checking the medical dictionary..."
+
+Rotate these subtly if possible.
+
+FUTURE-READY ARCHITECTURE:
+
+Structure the Ask Medi feature cleanly so a real AI API can be connected later if one is not currently available.
+
+Do not hardcode fake chatbot responses as the long-term implementation.
+
+Create a clear separation between:
+- User interface
+- Conversation logic
+- AI service/API integration
+- Dictionary data
+
+If an AI API key is required, use secure environment variables and never expose API keys in frontend code.
+
+If no AI API is currently connected, build the complete interface and architecture with a graceful placeholder educational mode rather than breaking the website.
+
+FINAL QUALITY CHECK:
+
+Before finishing, verify that:
+
+- Ask Medi has been added to the main navigation
+- The new feature is clearly branded as "Ask Medi"
+- The tagline is "Your personal medical learning assistant."
+- The feature matches the existing MediMind visual design
+- The chat interface is polished and functional
+- Suggested starter questions work
+- The assistant supports explanations, comparisons, mnemonics, quizzes, word breakdowns, and educational clinical context
+- Ask Medi integrates with the Medical Dictionary where possible
+- The assistant does not present itself as a real doctor
+- Existing MediMind functionality has not been removed or broken
+- The website remains responsive
+- API keys and sensitive credentials are handled securely
+- The implementation is clean and easy to expand in the future
+
+Do not replace the existing website or rebuild it from scratch. Carefully ADD Ask Medi as a polished new MediMind feature while preserving everything that already works.
